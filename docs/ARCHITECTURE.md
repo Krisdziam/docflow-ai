@@ -13,6 +13,14 @@ Status: planning baseline. It must be updated when implementation evidence chang
 
 No separate Python service, LangChain, Docker, microservices, or Redis is planned for the Core MVP.
 
+## Cost boundary
+
+- The operating budget for external services is zero.
+- Hosted components may be used only while their current free plan covers the agreed learning workload and cannot silently create charges.
+- Before enabling a hosted dependency, verify its official current free-plan limits and record the relevant constraints.
+- When a free quota is unavailable or exhausted, prefer a local implementation, mock adapter, deferred job, or explicit unavailable state over paid usage.
+- Provider adapters must allow a paid AI/OCR provider to remain disabled without blocking the rest of the application.
+
 ## Data flow
 
 ```mermaid
@@ -98,7 +106,7 @@ The final schema, constraints, relationships, and row-level security rules must 
 
 ## Pending architecture decisions
 
-- Initial AI/vision provider and cost ceiling.
+- Initial free-tier or local AI/vision provider and its quota ceiling.
 - Supabase hosted development project versus a later local setup.
 - Demo authentication depth for the first UI iteration.
 - Exact supported currencies and tolerance rules.

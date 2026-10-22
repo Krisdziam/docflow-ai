@@ -31,7 +31,8 @@ Milestones 0–5 form the Core MVP. Milestones 6 and 7 are extensions, not prere
 - Failed, skipped, or unavailable checks are recorded.
 - Documentation is updated to reflect the implemented architecture.
 - No next milestone begins before user review and approval.
-- External integrations, paid services, deployment, and outbound messages require separate approval.
+- External integrations, deployment, and outbound messages require separate approval.
+- Paid services, usage-based billing, and automatically chargeable resources are prohibited. Each external dependency must be checked against its current free-plan limits before activation.
 
 ## Completion definition
 

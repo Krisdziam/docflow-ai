@@ -96,3 +96,5 @@ Metrics must be calculated from the final fictional fixture set:
 - Every important status change is auditable.
 - Errors must be visible, explainable, and recoverable.
 - The UI should resemble a restrained operations/finance SaaS product.
+- The learning project must operate with zero external-service spend: only free plans, free quotas, local tools, or mock adapters are allowed unless the user explicitly changes this constraint.
+- Exhausted free quotas must produce a visible bounded failure or demo fallback, never an automatic paid charge.

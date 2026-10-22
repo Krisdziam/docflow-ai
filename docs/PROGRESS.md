@@ -117,3 +117,10 @@ This file records observed progress and verification evidence. Plans and intende
 - **Automated verification:** `npm test` passed (3 files, 15 tests); `npm run lint`, `npm run typecheck`, and `npm run build` passed. The Next.js 16.4.2 Webpack build statically generated `/uk` and `/en`.
 - **Live verification:** Automatic Vercel deployment `dpl_FbbEtcm48VewRgv5EjRhMPpMC9jM` completed with status `Ready`. After a fresh reload, the production Ukrainian page displayed the approved sentence verbatim.
 - **Next gate:** Continue to await explicit user approval before Milestone 1.
+
+### 2026-10-22 — Zero-cost operating constraint
+
+- **Status:** Accepted as a project-wide requirement.
+- **Changes:** Recorded a zero external-service budget in the project brief, roadmap, architecture, and decision log. Only free plans, free quotas, local tools, and mock adapters are allowed; automatically chargeable resources are prohibited, and exhausted quotas must fail visibly or use a documented fallback.
+- **Verification:** `git diff --check` passed after the documentation update. No service, billing method, paid plan, or external resource was enabled.
+- **Next gate:** Before Milestone 1 storage is connected, verify the current official free-plan terms and limits of the selected provider.
