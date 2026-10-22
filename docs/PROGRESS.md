@@ -109,3 +109,10 @@ This file records observed progress and verification evidence. Plans and intende
 - **Live verification:** Vercel CLI verification returned HTTP 200 and the title `DocFlow AI`; independent unauthenticated requests to `/`, `/uk/`, and `/en/` each returned HTTP 200. In the live Ukrainian interface, selecting the `Погоджено` filter reduced the queue to `Orion Logistics Demo` and updated the details panel to `DN-552`.
 - **Security and scope boundary:** No credentials were committed. The deployment contains only the existing frontend prototype; no backend, API route, storage, OCR, paid service, or real document transmission was introduced.
 - **Next gate:** Continue to await explicit user approval before Milestone 1.
+
+### 2026-10-22 — Ukrainian hero copy refinement
+
+- **Status:** Complete.
+- **Changes:** Replaced the ambiguous phrase “показує причини уваги” with the user-approved wording “виявляє можливі проблеми” and changed “фінальне рішення за фахівцем” to the more natural “остаточне рішення фахівцю”. English copy and application behavior were not changed.
+- **Automated verification:** `npm test` passed (3 files, 15 tests); `npm run lint`, `npm run typecheck`, and `npm run build` passed. The Next.js 16.4.2 Webpack build statically generated `/uk` and `/en`.
+- **Next gate:** Verify the updated Ukrainian sentence on the automatic Vercel deployment; continue to await explicit user approval before Milestone 1.
