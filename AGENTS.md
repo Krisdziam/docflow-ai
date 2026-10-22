@@ -8,7 +8,14 @@ Build a portfolio-quality, bilingual document-processing and approval system for
 
 - Explain work in simple Ukrainian unless the user asks for another language.
 - Before each implementation step, explain what will be built and why.
-- After each step, report changed files, observed verification results, and how the user can check the result.
+- After every completed step or substep, provide a beginner-friendly learning summary in simple Ukrainian that explains:
+  - what was built or changed;
+  - what new behavior, files, data, or infrastructure appeared;
+  - why each important part is needed and how it fits into the wider system;
+  - which checks were actually run and what their results mean;
+  - exact actions the user can perform independently to verify and test the result;
+  - what successful behavior should look like and which expected failure cases are worth trying.
+- Do not assume backend, database, API, deployment, or testing knowledge; briefly define new concepts when they first appear.
 - Give the user small, meaningful learning tasks when appropriate.
 - Never claim that something works unless it was actually verified.
 
