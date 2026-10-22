@@ -12,7 +12,7 @@ Project preparation and Milestone 0 are complete. Milestone 1.1 adds a server-si
 
 ## Current foundation
 
-- DocFlow AI application release 0.1.1, showing Milestone 1.1 in the interface.
+- DocFlow AI application release 0.1.2, showing Milestone 1.1 in the interface.
 - Next.js 16.4.2 with the App Router and React 19.3.1.
 - TypeScript 6.0.3 in strict mode.
 - Tailwind CSS 4.3.3.

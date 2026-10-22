@@ -19,12 +19,13 @@ Record only material decisions that affect scope, architecture, verification, se
 | D-013 | 2026-10-22 | Accepted | Keep the learning project at zero external-service spend. Use only free plans, free quotas, local tools, or mock adapters; never enable usage-based billing or an automatically chargeable resource without a future explicit reversal by the user. | The user is not willing to invest additional funds in the educational project. Explicit quota failures and fallbacks are safer than accidental charges. |
 | D-014 | 2026-10-22 | Accepted | Milestone 1.1 moves the current application from static export to the Next.js server runtime on Vercel. GitHub Pages remains an archived Milestone 0 snapshot and its deployment workflow is replaced by server-build CI. | A request-dependent POST Route Handler is unsupported by static export. Keeping one current deployment avoids presenting the old static preview as API-capable. |
 | D-015 | 2026-10-22 | Accepted | `POST /api/uploads` validates one PDF/JPG/PNG up to 10 MB by extension, optional declared MIME type, and byte signature, then returns SHA-256, UUID v4 document/correlation IDs, and `persisted: false` without writing the file. | This creates a tested trust boundary before database and private storage decisions, while keeping 1.1 zero-cost and reversible. |
+| D-016 | 2026-10-22 | Accepted | Do not use a Vercel Function as the final transport for the 10 MB upload flow; keep the 1.1 endpoint as validation evidence and design persistence around a signed direct upload plus server-side finalization. | Vercel's documented Function payload limit is 4.5 MB, so proxying the complete file would contradict the product's 10 MB limit. |
 
 ## Pending decisions
 
 | ID | Target milestone | Question | Recommended default |
 |---|---|---|---|
 | P-002 | 0 | How much authentication should the UI prototype include? | Use a demo user shell; add real authentication only when persistence requires it. |
-| P-003 | 1 | Hosted Supabase or another controlled development storage mode? | Hosted Supabase development project, subject to user approval and plan limits. |
-| P-004 | 2 | First extraction provider? | Compare OpenAI Vision and Gemini on a small fictional fixture set before locking in. |
+| P-003 | 1 | Approve a hosted Supabase Free development project for substep 1.2? | Use one free project with a private quarantine bucket, signed resumable uploads, 500 MB database, 1 GB file storage, and explicit quota-failure behavior. |
+| P-004 | 2 | First extraction provider? | Compare Gemini's free tier with local Tesseract on the fictional fixture set; keep paid OpenAI API usage disabled. |
 | P-005 | 3 | Currency list and financial tolerance? | Start with UAH, EUR, and USD and define a decimal-safe tolerance with tests. |

@@ -60,9 +60,21 @@ for (const filename of filenames) {
     body: formData,
     method: "POST",
   });
-  const body = await response.json();
+  const responseText = await response.text();
+  let body = null;
+
+  try {
+    body = JSON.parse(responseText);
+  } catch {
+    // Hosting platforms can reject oversized requests before the application
+    // runs and return a plain-text response instead of the API JSON contract.
+  }
+
   const passed = response.status === expectedStatus;
-  const resultCode = body.error?.code ?? body.data?.status ?? "unknown";
+  const resultCode =
+    body?.error?.code ??
+    body?.data?.status ??
+    (responseText.trim().slice(0, 80) || "unknown");
 
   console.log(
     `${passed ? "PASS" : "FAIL"} ${filename}: ${response.status} ${resultCode}`,
@@ -73,7 +85,7 @@ for (const filename of filenames) {
     failedChecks += 1;
   }
 
-  if (response.status === 201 && body.data?.persisted !== false) {
+  if (response.status === 201 && body?.data?.persisted !== false) {
     console.error("  Successful 1.1 responses must report persisted: false.");
     failedChecks += 1;
   }

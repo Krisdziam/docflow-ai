@@ -157,3 +157,14 @@ This file records observed progress and verification evidence. Plans and intende
 - **Production verification:** The live Ukrainian page returned HTTP 200 and contained both `Milestone 1.1` and the updated server-validation status. A tiny fictional PDF returned `201`, `persisted: false`, and matching header/body correlation IDs; text disguised as PDF returned `415 UNSUPPORTED_FILE_TYPE`.
 - **External actions:** After explicit approval, created and pushed the release commit and allowed the connected Vercel project to deploy it. Production checks used only tiny fictional in-memory data; no real document or persistent storage was involved.
 - **Next gate:** Await user review. Do not start 1.2 without explicit approval.
+
+### 2026-10-22 — Release 0.1.2 production verification maintenance
+
+- **Status:** Implementation and verification complete; release push and deployment pending.
+- **User review:** The user reviewed the Milestone 1.1 behavior and authorized updating the current version plus planning the next zero-cost steps. This does not authorize creating a Supabase project or implementing substep 1.2.
+- **Changes:** Updated the application metadata from `0.1.1` to `0.1.2`. Made the upload-fixture verifier tolerate a plain-text hosting-platform response while preserving JSON checks for application responses.
+- **Reason:** Vercel correctly rejects the oversized fixture before the Next.js route runs and returns plain text with HTTP `413 FUNCTION_PAYLOAD_TOO_LARGE`; the earlier verifier received the correct status but crashed while forcing the response through JSON parsing.
+- **Verification:** `node --check scripts/verify-upload-fixtures.mjs` passed. The complete suite passed 5 files and 33 tests; `npm run lint`, `npm run typecheck`, `npm run build`, and `git diff --check` passed. Against production, all ten fixtures reported `PASS`, including the oversized file, and the verifier finished with `All 10 upload fixtures behaved as expected.`
+- **Hosting constraint:** Official Vercel documentation confirms a 4.5 MB Function request/response body limit. The current 1.1 endpoint therefore cannot be the final transport for the product's 10 MB files. The proposed 1.2 architecture uses signed direct/resumable upload to private quarantine storage followed by server-side validation and finalization.
+- **External resources:** Official free-plan research found Supabase Free provides two active projects, 500 MB database per project, 1 GB file storage, and 5 GB uncached plus 5 GB cached egress; inactive free projects may pause after one week. No account, project, bucket, table, credential, billing method, AI provider, or n8n instance was created.
+- **Next gate:** Release 0.1.2 may be pushed and deployed under the user's update authorization. Substep 1.2 remains unapproved until the user accepts the Supabase Free constraints and proposed direct-upload design.

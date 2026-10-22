@@ -25,10 +25,11 @@ No separate Python service, LangChain, Docker, microservices, or Redis is planne
 
 ```mermaid
 flowchart LR
-    U[Browser user] -->|PDF/JPG/PNG| A[Next.js upload API]
-    A --> V[Server file validation]
+    U[Browser user] -->|Request signed upload| A[Next.js upload control API]
+    A -->|Short-lived token| U
+    U -->|Direct resumable PDF/JPG/PNG upload| S[Private quarantine storage]
+    S --> V[Server post-upload validation]
     V --> H[SHA-256 and IDs]
-    H --> S[Private object storage]
     H --> D[(PostgreSQL document record)]
     D --> N[n8n workflow]
     N --> C[Classification and OCR/AI extraction]
@@ -54,6 +55,14 @@ For the Core MVP, users upload files through the DocFlow AI website using drag-a
 - Errors contain a stable public code, safe message, and correlation ID. File contents and stack traces are not returned or logged.
 - The current handler buffers a maximum 10 MB file in memory to validate and hash it. This is bounded for 1.1 but should be reviewed if the upload limit or processing model changes.
 - The browser upload prototype remains disconnected from this API until a separately reviewed substep introduces the real persistence flow.
+
+### Verified hosting constraint and proposed persistence flow
+
+- Vercel Functions enforce a 4.5 MB maximum request or response payload. Therefore the current multipart endpoint is useful for Milestone 1.1 validation evidence but cannot be the final transport for the product's 10 MB files.
+- The proposed Milestone 1.2 flow uses small Next.js control requests plus a short-lived signed direct upload into a private Supabase quarantine bucket.
+- Files above 6 MB should use Supabase's TUS resumable upload path with 6 MB chunks and visible progress/retry behavior.
+- After upload, a server-only finalization step must read the quarantined object, validate extension/MIME/signature/size, calculate SHA-256, enforce idempotency, and create the canonical document record. Invalid objects must be removed instead of entering processing.
+- This is a reviewed proposal, not implemented behavior. No Supabase project, bucket, table, credential, or storage write exists yet.
 
 ## Processing state machine
 

@@ -1,6 +1,6 @@
 # Milestone 1 — Secure Upload and Storage
 
-**Status:** In progress — substep 1.1 implemented, deployed, and verified; awaiting user review
+**Status:** In progress — substep 1.1 implemented, deployed, verified, and reviewed; substep 1.2 is proposed but not approved
 
 ## Objective
 
@@ -35,7 +35,12 @@ Not part of 1.1: browser-to-API wiring, database records, private object storage
 
 ### 1.2 and later
 
-Not approved or started. The next bounded substep must be proposed from the remaining Milestone 1 scope and requires explicit user approval. Any hosted storage/database option must first be checked against the zero-cost rule and current official free-plan limits.
+Not approved or started. The current proposal is:
+
+- **1.2 — Private storage and document record foundation:** use a free Supabase development project, a private quarantine bucket, signed direct/resumable browser uploads, a minimal `documents` table, server-side post-upload validation and SHA-256, and idempotent finalization. Invalid uploads must be removed from quarantine, and no OCR or AI starts in this substep.
+- **1.3 — Real browser upload experience:** connect the existing picker to the approved 1.2 flow, expose progress/retry/error states, and verify desktop/mobile behavior.
+
+The direct-upload design is required if the product keeps its 10 MB limit: Vercel Functions accept at most a 4.5 MB request body, while Supabase recommends resumable TUS uploads for files above 6 MB. The browser must never receive a Supabase service-role secret. Provider creation, credentials, schema implementation, and storage writes still require explicit user approval.
 
 ## Non-goals
 
