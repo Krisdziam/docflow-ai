@@ -39,7 +39,7 @@ export default async function LocalizedLayout({
   const dictionary = getDictionary(locale);
 
   return (
-    <html lang={locale}>
+    <html data-scroll-behavior="smooth" lang={locale}>
       <body>
         <ApplicationShell dictionary={dictionary} locale={locale}>
           {children}

@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { ArrowIcon, ArchiveIcon, DocumentsIcon, ReviewIcon } from "@/components/icons";
+import { DocumentQueue } from "@/components/document-queue";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { UploadDropzone } from "@/components/upload-dropzone";
@@ -102,6 +103,16 @@ export default async function LocalizedHomePage({ params }: LocalizedPageProps) 
         </Card>
       </section>
 
+      <section
+        aria-labelledby="documents-title"
+        className="mt-16 scroll-mt-40"
+        id="documents"
+      >
+        <Card className="overflow-hidden">
+          <DocumentQueue copy={dictionary.queue} locale={locale} />
+        </Card>
+      </section>
+
       <section className="mt-16 scroll-mt-40" id="workspace">
         <div className="max-w-2xl">
           <h2 className="text-2xl font-bold tracking-[-0.025em]">
@@ -112,7 +123,7 @@ export default async function LocalizedHomePage({ params }: LocalizedPageProps) 
           </p>
         </div>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
-          {modules.map((module) => {
+          {modules.filter((module) => module.id !== "documents").map((module) => {
             const Icon = module.icon;
 
             return (

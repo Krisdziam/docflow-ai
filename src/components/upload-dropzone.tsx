@@ -82,7 +82,7 @@ export function UploadDropzone({ copy }: UploadDropzoneProps) {
       : "border-[var(--color-border-strong)] bg-[var(--color-surface-subtle)] hover:border-[var(--color-brand)] hover:bg-[var(--color-brand-soft)]";
 
   return (
-    <div>
+    <div className="upload-picker">
       <input
         accept=".pdf,.jpg,.jpeg,.png,application/pdf,image/jpeg,image/png"
         className="sr-only"

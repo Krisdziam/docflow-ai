@@ -7,8 +7,8 @@ This file records observed progress and verification evidence. Plans and intende
 | Milestone | Status | Evidence | Blockers |
 |---|---|---|---|
 | Preparation | Complete | Project guidance, brief, roadmap, architecture, decisions, environment template, and milestone plans created on 2026-10-22 | None |
-| 0 — Foundation and UI | In progress | Substeps 0.1–0.2 verified; 0.3 implemented and published as a verified GitHub Pages frontend preview on 2026-10-22 | Manual selected/drop-state check and user review before 0.4 |
-| 1 — Upload and storage | Not started | None | Milestone 0 |
+| 0 — Foundation and UI | Complete | Substeps 0.1–0.5 verified; file picker and drag-and-drop manually confirmed; user review completed on 2026-10-22 | None |
+| 1 — Upload and storage | Not started | None | Explicit user approval to begin Milestone 1 |
 | 2 — AI extraction | Not started | None | Milestone 1 and provider decision |
 | 3 — Validation and duplicates | Not started | None | Milestone 2 |
 | 4 — Review dashboard | Not started | None | Milestone 3 |
@@ -67,3 +67,26 @@ This file records observed progress and verification evidence. Plans and intende
 - **Known limitation:** The selected-file and drag-and-drop state still requires the user's manual browser check because the automated in-app file chooser did not populate `FileList` during localhost verification.
 - **External actions:** Enabled GitHub Pages with GitHub Actions, pushed the implementation commit, deployed the public preview, and updated repository metadata. No production backend, account integration, paid service, message, or real document upload was introduced.
 - **Next gate:** User tests one fictional PDF/JPG/PNG on the public preview and reviews 0.3 before explicitly approving 0.4.
+
+### 2026-10-22 — Milestone 0.4 queue and document prototype
+
+- **Status:** Implementation and scoped verification complete; awaiting user review before Milestone 0.5.
+- **Prior gate evidence:** The user manually confirmed the JPG picker selected-state on the GitHub Pages preview. Drag-and-drop was not separately confirmed and remains an explicit 0.5 verification item.
+- **Changes:** Added five typed fictional document records; status-based queue filters; processing, needs-review, approved, duplicate, and failed badges; selectable document rows; localized detail panels; and explicit ready, loading, empty, and error demonstration scenarios. Updated the page milestone label and kept review/archive modules visibly planned. No API, storage, persistence, OCR, or backend behavior was introduced.
+- **Automated verification:** `npm test` passed (3 files, 15 tests); `npm run lint`, `npm run typecheck`, `npm run build`, and `git diff --check` passed. The Next.js 16.4.2 Webpack build statically generated `/uk` and `/en`.
+- **Runtime verification:** In local desktop Chrome, Ukrainian and English queue content rendered; the approved filter narrowed the queue and changed the details panel; selecting the duplicate record changed its details and review reason; loading, empty, and error scenarios were observed; and the empty-state action restored the queue. An initial `Intl.NumberFormat` difference between Node.js and Chrome caused a hydration mismatch for UAH; deterministic formatting fixed it, and a clean reload showed no Next.js issue badge. The installed Next.js smooth-scroll warning was also resolved with the documented `<html>` attribute.
+- **External actions:** None. No commit, push, deployment, account connection, document upload, message, or paid service action was performed.
+- **Next gate:** User reviews 0.4 and explicitly approves 0.5 responsive and accessibility verification.
+
+### 2026-10-22 — Milestone 0.5 responsive and accessibility verification
+
+- **Status:** Complete. The user reviewed the result and manually confirmed the remaining drag-and-drop interaction, so Milestone 0 meets its acceptance criteria.
+- **Changes:** Updated the visible milestone label to 0.5 and added a focus bridge so keyboard focus on the visually hidden file input produces a clear focus ring on its visible “Choose file” or “Choose another” label. No business logic, backend, upload API, persistence, OCR, or storage was added.
+- **Responsive verification:** The local English interface was visually checked in desktop Chrome and at a 390 px responsive width. The mobile header and language switch rendered, the desktop sidebar was replaced by horizontally scrollable navigation, headings wrapped without clipping, and the upload and queue sections stayed within the page width. Queue content and details remain in semantic source order for the stacked mobile layout.
+- **Keyboard and semantics verification:** The skip link became visible on `Tab` and moved focus to `#main-content`; the primary action, locale links, navigation, scenario selector, status filters, and document rows were reachable by keyboard; `Enter` on a document row updated the selected record and details. The file input focus defect found during this pass was corrected and rechecked: `#prototype-file` remained the active element while the visible file-picker label displayed a strong blue focus ring. The browser accessibility tree exposed the main landmark, labelled navigation, headings, upload control, status filters, document rows, and definition-list details.
+- **Contrast verification:** Representative foreground/background pairs all met WCAG AA for normal text: primary text on white 16.35:1, muted text on white 5.67:1, brand on white 5.99:1, strong brand on soft brand 7.52:1, success on success-soft 5.55:1, warning on warning-soft 6.88:1, red-700 on red-50 5.91:1, and slate-700 on slate-100 9.45:1.
+- **Automated verification:** After all code, documentation, and milestone-label updates, `npm test` passed (3 files, 15 tests), `npm run lint` passed, `npm run typecheck` passed, `npm run build` passed with Next.js 16.4.2 in Webpack mode and statically generated `/uk` and `/en`, and `git diff --check` passed.
+- **Manual acceptance evidence:** The user dragged the fictional PNG `09-telegram.png` (1.0 MB) into the public prototype and shared a screenshot of the successful selected state. The interface displayed the filename, size, replacement/removal controls, and the notice that the file had not been sent or stored. This closes the previously outstanding drag-and-drop check.
+- **Observed environment note:** Chrome DevTools displayed two browser-environment `Permissions-Policy` warnings for `run-ad-auction` and `join-ad-interest-group`; no application runtime error was observed.
+- **External actions:** None. No commit, push, deployment, account connection, document upload, message, or paid service action was performed.
+- **Next gate:** Milestone 0 is complete. Do not begin Milestone 1 without explicit user approval.

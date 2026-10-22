@@ -1,6 +1,6 @@
 # Milestone 0 — Foundation and UI Prototype
 
-**Status:** In progress — substeps 0.1–0.2 verified; 0.3 deployed as a public frontend preview with one manual UI check pending
+**Status:** Complete — substeps 0.1–0.5 verified, user review completed, and file-picker plus drag-and-drop interactions manually confirmed on 2026-10-22
 
 ## Objective
 

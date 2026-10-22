@@ -73,6 +73,12 @@ textarea {
   outline-offset: 3px;
 }
 
+.upload-picker:has(input:focus-visible) label[for="prototype-file"] {
+  outline: 3px solid var(--color-focus);
+  outline-color: var(--color-focus) !important;
+  outline-offset: 3px;
+}
+
 ::selection {
   background: #bfdbfe;
   color: var(--color-text);
