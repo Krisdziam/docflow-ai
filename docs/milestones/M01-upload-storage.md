@@ -1,6 +1,6 @@
 # Milestone 1 — Secure Upload and Storage
 
-**Status:** In progress — substep 1.1 implemented and locally verified; awaiting user review
+**Status:** In progress — substep 1.1 implemented, deployed, and verified; awaiting user review
 
 ## Objective
 
@@ -20,7 +20,7 @@ Turn the upload prototype into a real browser upload flow that safely validates 
 
 ### 1.1 — Server upload API and validation
 
-Implemented and locally verified:
+Implemented, deployed, and verified:
 
 - Move the current application from static export to a server-capable Vercel deployment.
 - Add the `POST /api/uploads` multipart contract for exactly one file.
