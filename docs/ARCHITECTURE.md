@@ -1,6 +1,6 @@
 # Proposed Architecture
 
-Status: planning baseline. It must be updated when implementation evidence changes the design.
+Status: planning baseline with the verified Milestone 1.1 server boundary recorded below. It must be updated when implementation evidence changes the design.
 
 ## Smallest supported architecture
 
@@ -43,6 +43,17 @@ flowchart LR
 ## Upload boundary
 
 For the Core MVP, users upload files through the DocFlow AI website using drag-and-drop or the browser file picker. Mobile users may select an existing image or take a document photo when the browser supports it. Gmail and Drive are not required for the first working flow.
+
+### Implemented in Milestone 1.1
+
+- The primary deployment is a server-capable Next.js 16.4.2 application on Vercel; static export is no longer the current application architecture.
+- `POST /api/uploads` accepts one `multipart/form-data` field named `file`.
+- The server enforces the 10 MB limit and compares the extension, optional browser-declared MIME type, and PDF/JPEG/PNG byte signature.
+- A valid request receives a UUID v4 document ID, UUID v4 correlation ID, safe display filename, detected MIME type, size, and SHA-256.
+- The response explicitly reports `status: "validated"` and `persisted: false`. No database record, object storage write, upload queue, or `uploaded` state exists yet.
+- Errors contain a stable public code, safe message, and correlation ID. File contents and stack traces are not returned or logged.
+- The current handler buffers a maximum 10 MB file in memory to validate and hash it. This is bounded for 1.1 but should be reviewed if the upload limit or processing model changes.
+- The browser upload prototype remains disconnected from this API until a separately reviewed substep introduces the real persistence flow.
 
 ## Processing state machine
 

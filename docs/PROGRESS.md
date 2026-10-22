@@ -8,7 +8,7 @@ This file records observed progress and verification evidence. Plans and intende
 |---|---|---|---|
 | Preparation | Complete | Project guidance, brief, roadmap, architecture, decisions, environment template, and milestone plans created on 2026-10-22 | None |
 | 0 — Foundation and UI | Complete | Substeps 0.1–0.5 verified; file picker and drag-and-drop manually confirmed; user review completed on 2026-10-22 | None |
-| 1 — Upload and storage | Not started | None | Explicit user approval to begin Milestone 1 |
+| 1 — Upload and storage | In progress | Substep 1.1 server upload validation and API verified locally on 2026-10-22 | User review of 1.1; separate approval and provider decision before persistence |
 | 2 — AI extraction | Not started | None | Milestone 1 and provider decision |
 | 3 — Validation and duplicates | Not started | None | Milestone 2 |
 | 4 — Review dashboard | Not started | None | Milestone 3 |
@@ -124,3 +124,17 @@ This file records observed progress and verification evidence. Plans and intende
 - **Changes:** Recorded a zero external-service budget in the project brief, roadmap, architecture, and decision log. Only free plans, free quotas, local tools, and mock adapters are allowed; automatically chargeable resources are prohibited, and exhausted quotas must fail visibly or use a documented fallback.
 - **Verification:** `git diff --check` passed after the documentation update. No service, billing method, paid plan, or external resource was enabled.
 - **Next gate:** Before Milestone 1 storage is connected, verify the current official free-plan terms and limits of the selected provider.
+
+### 2026-10-22 — Milestone 1.1 server upload API and validation
+
+- **Status:** Implementation and local verification complete; awaiting user review. Milestone 1 remains in progress, and no work on storage substep 1.2 has started.
+- **Server deployment boundary:** Removed Next.js static export and the Pages-specific base path. Added a server-side `307` root redirect to `/uk`. Replaced the GitHub Pages deployment workflow with CI that tests, lints, type-checks, and builds the server application. Vercel remains the current deployment target; the existing GitHub Pages site is an archived Milestone 0 snapshot.
+- **API contract:** Added `POST /api/uploads`, which accepts exactly one `multipart/form-data` file field named `file`. A successful request returns HTTP `201`, UUID v4 document and correlation IDs, safe display filename, detected MIME type, byte size, SHA-256, `status: "validated"`, and `persisted: false`.
+- **Validation and security:** The server enforces a 10 MB limit and validates filename extension, optional browser-declared MIME type, and the file's PDF/JPEG/PNG byte signature. Error responses use bounded public codes/messages and include the correlation ID without returning file contents or stack traces. Responses are marked `no-store` and `nosniff`. No full document content or extracted sensitive data is logged.
+- **Shared policy:** The existing client prototype and new server validation use the same supported-format and size constants. Client validation remains supplementary; the server is authoritative.
+- **Persistence boundary:** No file was stored, no database row or queue event was created, and no Supabase, OCR, AI, billing-enabled resource, or other external service was connected. The browser prototype does not call the API yet.
+- **Automated verification:** The focused server/API run passed 17 tests. The complete suite passed 5 files and 32 tests. `npm run lint` and `npm run typecheck` passed. After clearing one malformed generated `.next/dev` cache file, `npm run build` passed with `/` and `/api/uploads` shown as dynamic routes and `/uk` and `/en` generated successfully.
+- **Runtime verification:** A local Next.js 16.4.2 production server on port 3011 returned `307` from `/` to `/uk`. A fictional in-memory PDF request returned `201`, matching response/header correlation IDs, UUIDs, the expected SHA-256, and `persisted: false`. Text disguised as a PDF returned `415 UNSUPPORTED_FILE_TYPE`. The local server was stopped after the check.
+- **Observed environment notes:** The first local server attempt was blocked from binding port 3000 inside the sandbox; after permission, port 3000 was already occupied, so runtime verification used port 3011. The first server build exposed a malformed ignored `.next/dev/types/routes.d.ts`; deleting the reproducible `.next` cache produced a clean successful build. A broad `uploads/` ignore rule also hid the API source directory, so it was safely narrowed to `/uploads/`.
+- **Known limitations:** `Request.formData()` buffers the bounded file before validation; there is no persistence, idempotency enforcement, duplicate lookup, retry flow, upload progress, or UI-to-API connection yet. These are not claimed as implemented.
+- **Next gate:** User reviews 1.1. Do not begin storage/database work or substep 1.2 without explicit approval and a verified zero-cost provider decision.

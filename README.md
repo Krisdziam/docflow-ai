@@ -4,11 +4,11 @@ AI-assisted document processing and approval system for invoices, purchase order
 
 **Live UI prototype:** [https://docflow-ai-smoky.vercel.app/](https://docflow-ai-smoky.vercel.app/)
 
-**Fallback preview:** [https://krisdziam.github.io/docflow-ai/](https://krisdziam.github.io/docflow-ai/)
+**Archived Milestone 0 static snapshot:** [https://krisdziam.github.io/docflow-ai/](https://krisdziam.github.io/docflow-ai/)
 
 ## Current status
 
-Project preparation and Milestone 0 are complete. The bilingual frontend prototype is verified and deployed; Milestone 1 has not started and requires explicit approval.
+Project preparation and Milestone 0 are complete. Milestone 1.1 adds a server-side upload validation API without persistence; database and private object storage remain unimplemented.
 
 ## Current foundation
 
@@ -34,7 +34,7 @@ The primary Core MVP flow is browser upload:
 
 1. A user opens the DocFlow AI website.
 2. The user drags a PDF/JPG/PNG into the upload area or selects it from a computer or phone.
-3. The server validates and stores the original file.
+3. The server validates the original file. Storage is introduced in a later approved Milestone 1 substep.
 4. The document enters the processing pipeline.
 5. The result appears in the review queue.
 
@@ -74,6 +74,18 @@ npm run build
 
 The production build explicitly uses Next.js's supported Webpack mode because the current local execution environment causes Turbopack's production build to fail while binding an internal worker port. Development still uses the default Turbopack server.
 
-## Frontend deployment
+## Deployment
 
-Vercel is the primary deployment target and is connected to this GitHub repository for automatic deployments from `main`. GitHub Pages remains available as a fallback preview. Both deployments are intentionally frontend-only: selected files remain in the browser and are not uploaded or stored. Real server validation and private storage belong to Milestone 1.
+Vercel is the primary deployment target and is connected to this GitHub repository for automatic deployments from `main`. The application now uses the Next.js server runtime because `POST /api/uploads` cannot run in a static export. GitHub Pages is an archived Milestone 0 frontend snapshot and is no longer updated by the repository workflow.
+
+The upload API validates files and returns metadata only. It does not yet store file contents or create a database record. The existing browser prototype also remains intentionally disconnected from the API until the real upload flow is introduced in a separately reviewed substep.
+
+## Upload API contract
+
+Send one PDF, JPG, or PNG file of at most 10 MB in a `multipart/form-data` field named `file`:
+
+```bash
+curl --form 'file=@./fictional-invoice.pdf' http://localhost:3000/api/uploads
+```
+
+A successful `201` response contains a document UUID, correlation UUID, safe display filename, detected MIME type, byte size, SHA-256, `status: "validated"`, and `persisted: false`. Validation failures return a safe error code and message plus the correlation ID. Do not use real documents for testing.

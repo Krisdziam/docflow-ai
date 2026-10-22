@@ -1,12 +1,12 @@
-export const prototypeMaxFileBytes = 10 * 1024 * 1024;
+import {
+  acceptedUploadExtensions,
+  acceptedUploadMimeTypes,
+  maxUploadBytes,
+} from "@/lib/upload-policy";
 
-export const acceptedFileTypes = [
-  "application/pdf",
-  "image/jpeg",
-  "image/png",
-] as const;
+export const prototypeMaxFileBytes = maxUploadBytes;
 
-const acceptedExtensions = [".pdf", ".jpg", ".jpeg", ".png"] as const;
+export const acceptedFileTypes = acceptedUploadMimeTypes;
 
 export type PrototypeFile = Readonly<{
   name: string;
@@ -29,7 +29,7 @@ export function validatePrototypeFile(
   const hasAcceptedType = acceptedFileTypes.some(
     (acceptedType) => acceptedType === file.type,
   );
-  const hasAcceptedExtension = acceptedExtensions.some((extension) =>
+  const hasAcceptedExtension = acceptedUploadExtensions.some((extension) =>
     normalizedName.endsWith(extension),
   );
 

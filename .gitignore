@@ -28,8 +28,8 @@ playwright-report/
 .vscode/
 
 # Local document uploads and generated fixtures
-uploads/
-tmp/
+/uploads/
+/tmp/
 
 # Vercel local project metadata
 .vercel/
