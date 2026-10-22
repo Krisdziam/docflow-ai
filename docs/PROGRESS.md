@@ -145,7 +145,7 @@ This file records observed progress and verification evidence. Plans and intende
 
 ### 2026-10-22 — Milestone 1.1 version and upload fixture pack
 
-- **Status:** Local implementation and verification complete; prepared for release 0.1.1 and Vercel deployment. This extends the approved 1.1 testing surface and does not begin 1.2.
+- **Status:** Release 0.1.1 implemented, pushed, deployed, and verified. This extends the approved 1.1 testing surface and does not begin 1.2.
 - **Visible version:** Updated the bilingual page badge from Milestone 0.5 to Milestone 1.1 and replaced obsolete “server upload will be introduced” text. The interface now truthfully says that the server validation API exists while the browser picker still does not submit or store files.
 - **Application version:** Updated the package release metadata from `0.1.0` to `0.1.1` without creating a Git tag.
 - **Fixture pack:** Added a reproducible generator for ten fictional files under the ignored local folder `test-fixtures/upload-api/files/`: two valid PDFs, three valid JPEG/PNG images, an empty PDF, text disguised as PDF, PNG bytes renamed to PDF, unsupported TXT, and a PDF-shaped file exactly one byte over the 10 MB limit. Added a tracked README with expected HTTP results and safe test commands.
@@ -153,4 +153,7 @@ This file records observed progress and verification evidence. Plans and intende
 - **API verification:** A local Next.js production server received all ten generated multipart uploads. The five valid files returned `201 validated`; the empty file returned `400 EMPTY_FILE`; the oversized file returned `413 FILE_TOO_LARGE`; and the disguised, mismatched, and unsupported files returned their expected `415` errors. The verification script reported all ten as `PASS`; the server was stopped afterward.
 - **Automated verification:** The complete suite passed 5 files and 33 tests. `npm run lint`, `npm run typecheck`, and `npm run build` passed; the build preserved dynamic `/api/uploads` and generated `/uk` and `/en` successfully.
 - **Storage boundary:** Generated binaries are ignored by Git because the oversized negative fixture is intentionally larger than 10 MB. The small generator, verification script, manifest, and expected outcomes are versioned so the set can be recreated. No database, object storage, OCR, AI, paid service, or real document was introduced.
-- **Next gate:** Deploy and verify release 0.1.1 on Vercel, then await user review. Do not start 1.2 without explicit approval.
+- **Release evidence:** Commit `4fd0a6c` (`feat: add milestone 1.1 upload fixtures`) was pushed to `origin/main`. GitHub Actions run `39791963340` passed dependency installation, 33 tests, lint, typecheck, and the server build. Vercel reported deployment `https://vercel.com/kennyjones/docflow-ai/A7Co58v5j1fSCVrXBvqzsNsPvdKw` complete.
+- **Production verification:** The live Ukrainian page returned HTTP 200 and contained both `Milestone 1.1` and the updated server-validation status. A tiny fictional PDF returned `201`, `persisted: false`, and matching header/body correlation IDs; text disguised as PDF returned `415 UNSUPPORTED_FILE_TYPE`.
+- **External actions:** After explicit approval, created and pushed the release commit and allowed the connected Vercel project to deploy it. Production checks used only tiny fictional in-memory data; no real document or persistent storage was involved.
+- **Next gate:** Await user review. Do not start 1.2 without explicit approval.
