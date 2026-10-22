@@ -99,3 +99,12 @@ This file records observed progress and verification evidence. Plans and intende
 - **Workflow note:** GitHub reported non-blocking notices that selected official actions still target the deprecated Node.js 20 action runtime and are currently forced onto Node.js 24, plus the scheduled `ubuntu-latest` migration. The workflow and deployment succeeded; future workflow maintenance should update official action versions when compatible releases are available.
 - **External actions:** Committed and pushed the verified Milestone 0 implementation and deployed the static frontend preview. No backend, production account, paid service, message, or real document transmission was introduced.
 - **Next gate:** Await explicit user approval before beginning Milestone 1.
+
+### 2026-10-22 — Vercel deployment migration
+
+- **Status:** The completed Milestone 0 frontend is deployed to Vercel at `https://docflow-ai-smoky.vercel.app/`; Milestone 1 remains not started.
+- **Changes:** Created the `kennyjones/docflow-ai` Vercel project, linked the local repository metadata, connected the GitHub repository `Krisdziam/docflow-ai` for automatic deployments, added `.vercel/` to `.gitignore`, and made the Vercel URL primary in `README.md`. GitHub Pages remains available as a fallback.
+- **Build verification:** Vercel built the project with Next.js 16.4.2, completed TypeScript validation, generated all four static pages, assigned the production alias, and reported the deployment state as `READY`.
+- **Live verification:** Vercel CLI verification returned HTTP 200 and the title `DocFlow AI`; independent unauthenticated requests to `/`, `/uk/`, and `/en/` each returned HTTP 200.
+- **Security and scope boundary:** No credentials were committed. The deployment contains only the existing frontend prototype; no backend, API route, storage, OCR, paid service, or real document transmission was introduced.
+- **Next gate:** Verify the final documentation commit deploys automatically from `main`; continue to await explicit user approval before Milestone 1.

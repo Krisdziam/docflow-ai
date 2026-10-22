@@ -15,6 +15,7 @@ Record only material decisions that affect scope, architecture, verification, se
 | D-009 | 2026-10-22 | Accepted | Production builds use the supported `next build --webpack` mode while development keeps Next.js's default Turbopack mode. | In this local execution environment, two Turbopack production builds failed while binding an internal worker port; the Webpack production build and Turbopack development server both passed. |
 | D-010 | 2026-10-22 | Accepted | The bilingual UI uses locale-prefixed routes (`/uk` and `/en`), with `/` redirected to the Ukrainian default. | Server-rendered locale routes keep translated content and the document `lang` attribute aligned without adding a client-side i18n dependency. |
 | D-011 | 2026-10-22 | Accepted | Publish the Milestone 0 frontend prototype as a static export at GitHub Pages under `/docflow-ai`; keep real upload and backend behavior out of the public preview. | The user approved a public test surface for browser interaction. Static export preserves the current prototype while avoiding premature server infrastructure or document transmission. |
+| D-012 | 2026-10-22 | Accepted | Use Vercel as the primary deployment target for the frontend prototype, connect it to `Krisdziam/docflow-ai`, and retain GitHub Pages as a fallback until separately decommissioned. | Vercel supports the current static Next.js export and provides a direct path to later server capabilities without prematurely starting Milestone 1; keeping Pages avoids an unnecessary destructive cutover. |
 
 ## Pending decisions
 
