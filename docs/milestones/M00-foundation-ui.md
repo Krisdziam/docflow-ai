@@ -1,6 +1,6 @@
 # Milestone 0 — Foundation and UI Prototype
 
-**Status:** In progress — substep 0.1 implemented and verified; awaiting user review
+**Status:** In progress — substeps 0.1–0.2 verified; 0.3 implemented with one manual UI check pending
 
 ## Objective
 
@@ -25,6 +25,7 @@ Substeps may be adjusted after the read-only preflight. Complete and review one 
 - Key loading, empty, success, warning, failure, duplicate, review, approved, and rejected states.
 - Accessibility basics.
 - Initial component and UI tests appropriate to the implemented scope.
+- A static GitHub Pages preview of the frontend prototype, explicitly approved on 2026-10-22.
 
 ## Non-goals
 
@@ -32,7 +33,7 @@ Substeps may be adjusted after the read-only preflight. Complete and review one 
 - Supabase data persistence.
 - n8n, OCR, or AI calls.
 - Real authentication or role enforcement unless separately approved.
-- Gmail, notifications, deployment, or external communication.
+- Gmail, notifications, production/backend deployment, or external communication. The approved GitHub Pages deployment is a frontend-only test preview.
 
 ## Acceptance criteria
 

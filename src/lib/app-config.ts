@@ -7,3 +7,7 @@ export const appConfig = {
   defaultLocale: "uk" satisfies SupportedLocale,
   supportedLocales,
 } as const;
+
+export function isSupportedLocale(locale: string): locale is SupportedLocale {
+  return supportedLocales.some((supportedLocale) => supportedLocale === locale);
+}

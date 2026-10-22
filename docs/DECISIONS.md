@@ -13,6 +13,8 @@ Record only material decisions that affect scope, architecture, verification, se
 | D-007 | 2026-10-22 | Accepted | Confidence is treated as a review signal, not a guaranteed probability. | Avoids presenting uncalibrated model output as factual accuracy. |
 | D-008 | 2026-10-22 | Accepted | The Milestone 0 foundation uses Next.js 16.4.2, React 19.3.1, TypeScript 6.0.3, Tailwind CSS 4.3.3, ESLint 9.39.5, and Vitest 5.0.5 with exact versions in `package.json`. | These were the current stable packages checked during setup; TypeScript 7 and ESLint 10 were rejected after observed parser and peer-dependency incompatibilities. |
 | D-009 | 2026-10-22 | Accepted | Production builds use the supported `next build --webpack` mode while development keeps Next.js's default Turbopack mode. | In this local execution environment, two Turbopack production builds failed while binding an internal worker port; the Webpack production build and Turbopack development server both passed. |
+| D-010 | 2026-10-22 | Accepted | The bilingual UI uses locale-prefixed routes (`/uk` and `/en`), with `/` redirected to the Ukrainian default. | Server-rendered locale routes keep translated content and the document `lang` attribute aligned without adding a client-side i18n dependency. |
+| D-011 | 2026-10-22 | Accepted | Publish the Milestone 0 frontend prototype as a static export at GitHub Pages under `/docflow-ai`; keep real upload and backend behavior out of the public preview. | The user approved a public test surface for browser interaction. Static export preserves the current prototype while avoiding premature server infrastructure or document transmission. |
 
 ## Pending decisions
 

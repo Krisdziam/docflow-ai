@@ -2,9 +2,11 @@
 
 AI-assisted document processing and approval system for invoices, purchase orders, and delivery notes.
 
+**Live UI prototype:** [https://krisdziam.github.io/docflow-ai/](https://krisdziam.github.io/docflow-ai/)
+
 ## Current status
 
-Project preparation is complete. Milestone 0 is in progress: substep 0.1 has a verified application foundation and is awaiting user review before substep 0.2 begins.
+Project preparation is complete. Milestone 0 is in progress: substeps 0.1–0.2 are verified, and the Milestone 0.3 upload prototype is implemented with automated checks and a manual file-selection check pending.
 
 ## Current foundation
 
@@ -59,7 +61,7 @@ npm install
 npm run dev
 ```
 
-Open `http://localhost:3000` after the development server starts.
+Open `http://localhost:3000/uk` after the development server starts. The English prototype is available at `http://localhost:3000/en`.
 
 ```bash
 npm test
@@ -69,3 +71,7 @@ npm run build
 ```
 
 The production build explicitly uses Next.js's supported Webpack mode because the current local execution environment causes Turbopack's production build to fail while binding an internal worker port. Development still uses the default Turbopack server.
+
+## GitHub Pages preview
+
+Pushes to `main` run unit tests, lint, typecheck, and a static Next.js build before deploying the `out` artifact to GitHub Pages. The public preview is intentionally frontend-only: selected files remain in the browser and are not uploaded or stored. Real server validation and private storage belong to Milestone 1.
