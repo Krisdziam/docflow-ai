@@ -105,6 +105,7 @@ This file records observed progress and verification evidence. Plans and intende
 - **Status:** The completed Milestone 0 frontend is deployed to Vercel at `https://docflow-ai-smoky.vercel.app/`; Milestone 1 remains not started.
 - **Changes:** Created the `kennyjones/docflow-ai` Vercel project, linked the local repository metadata, connected the GitHub repository `Krisdziam/docflow-ai` for automatic deployments, added `.vercel/` to `.gitignore`, and made the Vercel URL primary in `README.md`. GitHub Pages remains available as a fallback.
 - **Build verification:** Vercel built the project with Next.js 16.4.2, completed TypeScript validation, generated all four static pages, assigned the production alias, and reported the deployment state as `READY`.
-- **Live verification:** Vercel CLI verification returned HTTP 200 and the title `DocFlow AI`; independent unauthenticated requests to `/`, `/uk/`, and `/en/` each returned HTTP 200.
+- **Automatic deployment verification:** Push-triggered production deployment `dpl_22poUpHpFvDHQhSWLo66PmtPPVGH` completed with status `Ready` and reassigned the production aliases, confirming that the GitHub integration is active.
+- **Live verification:** Vercel CLI verification returned HTTP 200 and the title `DocFlow AI`; independent unauthenticated requests to `/`, `/uk/`, and `/en/` each returned HTTP 200. In the live Ukrainian interface, selecting the `Погоджено` filter reduced the queue to `Orion Logistics Demo` and updated the details panel to `DN-552`.
 - **Security and scope boundary:** No credentials were committed. The deployment contains only the existing frontend prototype; no backend, API route, storage, OCR, paid service, or real document transmission was introduced.
-- **Next gate:** Verify the final documentation commit deploys automatically from `main`; continue to await explicit user approval before Milestone 1.
+- **Next gate:** Continue to await explicit user approval before Milestone 1.
