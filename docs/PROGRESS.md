@@ -7,7 +7,7 @@ This file records observed progress and verification evidence. Plans and intende
 | Milestone | Status | Evidence | Blockers |
 |---|---|---|---|
 | Preparation | Complete | Project guidance, brief, roadmap, architecture, decisions, environment template, and milestone plans created on 2026-10-22 | None |
-| 0 — Foundation and UI | In progress | Substeps 0.1–0.2 verified; 0.3 implemented with automated and partial browser verification on 2026-10-22 | Manual selected/drop-state check and user review before 0.4 |
+| 0 — Foundation and UI | In progress | Substeps 0.1–0.2 verified; 0.3 implemented and published as a verified GitHub Pages frontend preview on 2026-10-22 | Manual selected/drop-state check and user review before 0.4 |
 | 1 — Upload and storage | Not started | None | Milestone 0 |
 | 2 — AI extraction | Not started | None | Milestone 1 and provider decision |
 | 3 — Validation and duplicates | Not started | None | Milestone 2 |
@@ -56,3 +56,14 @@ This file records observed progress and verification evidence. Plans and intende
 - **Runtime verification:** Ukrainian and English upload headings, guidance, file input, one-file picker mode, and mobile idle layout were observed in the active Next.js development server. The in-app browser opened the native file chooser but did not populate the HTML `FileList` for either a `/tmp` fixture or a workspace fixture; therefore the selected-file and drag-and-drop transitions were not claimed as browser-verified. Both temporary fictional fixtures were removed after the attempt.
 - **External actions:** None. No file was transmitted, no account connected, no message sent, no deployment performed, and no commit or push created.
 - **Next gate:** User manually checks selecting or dropping one fictional PDF/JPG/PNG, then reviews 0.3 before explicitly approving 0.4.
+
+### 2026-10-22 — GitHub Pages frontend preview
+
+- **Status:** Public frontend preview deployed successfully at `https://krisdziam.github.io/docflow-ai/` after explicit user approval.
+- **Changes:** Added Next.js static export and trailing-slash configuration, a Pages-aware base path, a static Ukrainian root redirect, and a GitHub Actions workflow that gates deployment on install, unit tests, lint, typecheck, and build. Added the live URL and frontend-only boundary to `README.md`; updated the GitHub repository description and Homepage field.
+- **Architecture boundary:** Removed the runtime locale Proxy because Next.js static export does not support Proxy. The public preview has no API routes, backend, persistence, OCR, or document transmission; root navigation uses a static relative redirect to `/uk/`.
+- **Local verification:** A Pages-mode build with `/docflow-ai` generated root, `/uk/`, and `/en/` HTML. A local static server returned the expected redirect and bilingual content, while the generated CSS asset returned HTTP 200.
+- **GitHub verification:** Commit `eb8ed8b` was pushed to `origin/main`. GitHub Actions run `39774054805` completed successfully: dependencies, 11 unit tests, lint, typecheck, static build, artifact upload, and deployment all passed. The public root, Ukrainian page, English page, and CSS asset returned HTTP 200 and expected content. The live desktop-width UI was visually inspected with the sidebar, two-column hero, and upload section rendered correctly.
+- **Known limitation:** The selected-file and drag-and-drop state still requires the user's manual browser check because the automated in-app file chooser did not populate `FileList` during localhost verification.
+- **External actions:** Enabled GitHub Pages with GitHub Actions, pushed the implementation commit, deployed the public preview, and updated repository metadata. No production backend, account integration, paid service, message, or real document upload was introduced.
+- **Next gate:** User tests one fictional PDF/JPG/PNG on the public preview and reviews 0.3 before explicitly approving 0.4.
