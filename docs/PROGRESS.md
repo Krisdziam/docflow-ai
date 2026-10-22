@@ -90,3 +90,12 @@ This file records observed progress and verification evidence. Plans and intende
 - **Observed environment note:** Chrome DevTools displayed two browser-environment `Permissions-Policy` warnings for `run-ad-auction` and `join-ad-interest-group`; no application runtime error was observed.
 - **External actions:** None. No commit, push, deployment, account connection, document upload, message, or paid service action was performed.
 - **Next gate:** Milestone 0 is complete. Do not begin Milestone 1 without explicit user approval.
+
+### 2026-10-22 — Milestone 0 release
+
+- **Status:** The completed Milestone 0 source was committed, pushed to `origin/main`, and deployed to the public GitHub Pages preview after explicit user approval.
+- **Release evidence:** Commit `2affde5` (`feat: complete milestone 0 UI prototype`) was pushed to `main`. GitHub Actions run `39778938034` completed successfully: dependency installation, 15 unit tests, lint, typecheck, static build, artifact upload, and Pages deployment all passed.
+- **Live verification:** The public `/en/` and `/uk/` pages returned HTTP 200 and contained the `Milestone 0.5` label plus the localized document queue. In the live English interface, selecting the `Approved` filter reduced the queue to the single fictional `Orion Logistics Demo` record and updated the details panel to `DN-552`.
+- **Workflow note:** GitHub reported non-blocking notices that selected official actions still target the deprecated Node.js 20 action runtime and are currently forced onto Node.js 24, plus the scheduled `ubuntu-latest` migration. The workflow and deployment succeeded; future workflow maintenance should update official action versions when compatible releases are available.
+- **External actions:** Committed and pushed the verified Milestone 0 implementation and deployed the static frontend preview. No backend, production account, paid service, message, or real document transmission was introduced.
+- **Next gate:** Await explicit user approval before beginning Milestone 1.
