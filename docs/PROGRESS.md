@@ -115,4 +115,5 @@ This file records observed progress and verification evidence. Plans and intende
 - **Status:** Complete.
 - **Changes:** Replaced the ambiguous phrase “показує причини уваги” with the user-approved wording “виявляє можливі проблеми” and changed “фінальне рішення за фахівцем” to the more natural “остаточне рішення фахівцю”. English copy and application behavior were not changed.
 - **Automated verification:** `npm test` passed (3 files, 15 tests); `npm run lint`, `npm run typecheck`, and `npm run build` passed. The Next.js 16.4.2 Webpack build statically generated `/uk` and `/en`.
-- **Next gate:** Verify the updated Ukrainian sentence on the automatic Vercel deployment; continue to await explicit user approval before Milestone 1.
+- **Live verification:** Automatic Vercel deployment `dpl_FbbEtcm48VewRgv5EjRhMPpMC9jM` completed with status `Ready`. After a fresh reload, the production Ukrainian page displayed the approved sentence verbatim.
+- **Next gate:** Continue to await explicit user approval before Milestone 1.
