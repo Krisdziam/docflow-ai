@@ -32,4 +32,16 @@ describe("appConfig", () => {
       );
     }
   });
+
+  it("shows the current Milestone 1.1 boundary in both languages", () => {
+    for (const locale of supportedLocales) {
+      expect(dictionaries[locale].page.milestone).toBe("Milestone 1.1");
+      expect(dictionaries[locale].upload.privacyBody).not.toContain(
+        "will be introduced",
+      );
+      expect(dictionaries[locale].upload.privacyBody).not.toContain(
+        "з’явиться",
+      );
+    }
+  });
 });

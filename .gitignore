@@ -18,6 +18,7 @@ next-env.d.ts
 coverage/
 test-results/
 playwright-report/
+__pycache__/
 
 # Logs
 *.log
@@ -30,6 +31,7 @@ playwright-report/
 # Local document uploads and generated fixtures
 /uploads/
 /tmp/
+/test-fixtures/upload-api/files/
 
 # Vercel local project metadata
 .vercel/

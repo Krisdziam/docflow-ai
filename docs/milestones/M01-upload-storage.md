@@ -28,6 +28,8 @@ Implemented, deployed, and verified:
 - Produce a safe display filename, UUID v4 document ID, UUID v4 correlation ID, and SHA-256.
 - Return bounded public errors and explicit `status: "validated"`, `persisted: false` metadata.
 - Cover the validation rules with unit tests and the HTTP contract with integration tests.
+- Provide a reproducible fictional set of five valid and five invalid upload fixtures with a one-command verification script.
+- Show Milestone 1.1 in the bilingual interface while clearly stating that the current picker remains disconnected from the API.
 
 Not part of 1.1: browser-to-API wiring, database records, private object storage, idempotency enforcement, queue state, progress UI, retries, duplicates, OCR, or AI.
 

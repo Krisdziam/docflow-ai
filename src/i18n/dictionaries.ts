@@ -23,11 +23,11 @@ const uk = {
     title: "Контроль документів без втрати людського рішення",
     description:
       "DocFlow AI готує документи до перевірки, виявляє можливі проблеми та залишає остаточне рішення фахівцю.",
-    milestone: "Milestone 0.5",
-    status: "UI-прототип активний",
-    noticeTitle: "Це безпечний UI-прототип",
+    milestone: "Milestone 1.1",
+    status: "Серверна валідація активна",
+    noticeTitle: "Upload API перевіряє файли на сервері",
     noticeBody:
-      "Реальне завантаження, обробка та збереження документів ще не підключені.",
+      "Серверний API вже валідує файли, створює ID та SHA-256. Ця форма ще не надсилає і не зберігає документи.",
     primaryAction: "Спробувати прототип",
     workspaceTitle: "Наступні модулі",
     workspaceDescription:
@@ -51,7 +51,7 @@ const uk = {
     fileTooLarge: "Файл перевищує демонстраційний ліміт 10 MB.",
     privacyTitle: "Без передачі даних",
     privacyBody:
-      "Прототип перевіряє лише назву, формат і розмір у браузері. Серверне завантаження з’явиться у Milestone 1.",
+      "Ця форма перевіряє файл лише у браузері. Серверний API Milestone 1.1 тестується окремо й поки не зберігає файли.",
   },
   queue: {
     eyebrow: "Прототип черги",
@@ -148,11 +148,11 @@ const en: DictionaryShape = {
     title: "Document control that keeps people in charge",
     description:
       "DocFlow AI prepares documents for review, explains what needs attention, and leaves the final decision to a specialist.",
-    milestone: "Milestone 0.5",
-    status: "UI prototype active",
-    noticeTitle: "This is a safe UI prototype",
+    milestone: "Milestone 1.1",
+    status: "Server validation active",
+    noticeTitle: "The upload API validates files on the server",
     noticeBody:
-      "Real document upload, processing, and storage are not connected yet.",
+      "The server API now validates files and creates IDs and SHA-256 hashes. This form does not send or store documents yet.",
     primaryAction: "Try the prototype",
     workspaceTitle: "Next modules",
     workspaceDescription:
@@ -176,7 +176,7 @@ const en: DictionaryShape = {
     fileTooLarge: "The file exceeds the 10 MB demonstration limit.",
     privacyTitle: "No data transfer",
     privacyBody:
-      "The prototype checks only the name, format, and size in your browser. Server upload will be introduced in Milestone 1.",
+      "This form checks the file only in your browser. The Milestone 1.1 server API is tested separately and does not store files yet.",
   },
   queue: {
     eyebrow: "Queue prototype",

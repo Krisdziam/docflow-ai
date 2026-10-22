@@ -12,6 +12,7 @@ Project preparation and Milestone 0 are complete. Milestone 1.1 adds a server-si
 
 ## Current foundation
 
+- DocFlow AI application release 0.1.1, showing Milestone 1.1 in the interface.
 - Next.js 16.4.2 with the App Router and React 19.3.1.
 - TypeScript 6.0.3 in strict mode.
 - Tailwind CSS 4.3.3.
@@ -89,3 +90,12 @@ curl --form 'file=@./fictional-invoice.pdf' http://localhost:3000/api/uploads
 ```
 
 A successful `201` response contains a document UUID, correlation UUID, safe display filename, detected MIME type, byte size, SHA-256, `status: "validated"`, and `persisted: false`. Validation failures return a safe error code and message plus the correlation ID. Do not use real documents for testing.
+
+## Fictional upload fixtures
+
+The local [`test-fixtures/upload-api/`](test-fixtures/upload-api/) folder documents ten reproducible test files: five valid PDF/JPG/PNG examples and five expected failures for empty, disguised, mismatched, unsupported, and oversized uploads. Generated binaries live in the ignored `files/` subfolder so the 10 MB negative fixture does not bloat Git history.
+
+```bash
+/Users/dziamkahome/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 scripts/generate-upload-fixtures.py
+node scripts/verify-upload-fixtures.mjs http://localhost:3000
+```
