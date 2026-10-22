@@ -160,11 +160,12 @@ This file records observed progress and verification evidence. Plans and intende
 
 ### 2026-10-22 — Release 0.1.2 production verification maintenance
 
-- **Status:** Implementation and verification complete; release push and deployment pending.
+- **Status:** Release `0.1.2` pushed and deployed to production; GitHub CI remains queued because GitHub has not finalized an earlier completed workflow run.
 - **User review:** The user reviewed the Milestone 1.1 behavior and authorized updating the current version plus planning the next zero-cost steps. This does not authorize creating a Supabase project or implementing substep 1.2.
 - **Changes:** Updated the application metadata from `0.1.1` to `0.1.2`. Made the upload-fixture verifier tolerate a plain-text hosting-platform response while preserving JSON checks for application responses.
 - **Reason:** Vercel correctly rejects the oversized fixture before the Next.js route runs and returns plain text with HTTP `413 FUNCTION_PAYLOAD_TOO_LARGE`; the earlier verifier received the correct status but crashed while forcing the response through JSON parsing.
 - **Verification:** `node --check scripts/verify-upload-fixtures.mjs` passed. The complete suite passed 5 files and 33 tests; `npm run lint`, `npm run typecheck`, `npm run build`, and `git diff --check` passed. Against production, all ten fixtures reported `PASS`, including the oversized file, and the verifier finished with `All 10 upload fixtures behaved as expected.`
+- **Release evidence:** Commit `fdfdf59` (`fix: harden production upload verification`) was pushed to `origin/main`. Vercel deployment `dpl_VcTd3TUVzcGALrs1X9ZzVK3Gh2VG` completed in `READY` state and received the primary production alias. GitHub Actions run `39794852817` was still queued at the last check; no CI result is claimed.
 - **Hosting constraint:** Official Vercel documentation confirms a 4.5 MB Function request/response body limit. The current 1.1 endpoint therefore cannot be the final transport for the product's 10 MB files. The proposed 1.2 architecture uses signed direct/resumable upload to private quarantine storage followed by server-side validation and finalization.
 - **External resources:** Official free-plan research found Supabase Free provides two active projects, 500 MB database per project, 1 GB file storage, and 5 GB uncached plus 5 GB cached egress; inactive free projects may pause after one week. No account, project, bucket, table, credential, billing method, AI provider, or n8n instance was created.
-- **Next gate:** Release 0.1.2 may be pushed and deployed under the user's update authorization. Substep 1.2 remains unapproved until the user accepts the Supabase Free constraints and proposed direct-upload design.
+- **Next gate:** Substep 1.2 remains unapproved until the user accepts the Supabase Free constraints and proposed direct-upload design.
